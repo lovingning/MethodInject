@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+apply plugin: 'bintray-release'//添加
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.squareup:javapoet:1.9.0'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    compile project(':methodinject-annotations')
+}
+
+//添加
+publish {
+    artifactId = 'methodinject-compiler'
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    uploadName = rootProject.uploadName
+    publishVersion = rootProject.publishVersion
+    desc = rootProject.description
+    website = rootProject.website
+    licences = rootProject.licences
+}

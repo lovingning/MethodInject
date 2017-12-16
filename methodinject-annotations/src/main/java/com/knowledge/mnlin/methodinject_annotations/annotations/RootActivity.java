@@ -1,4 +1,4 @@
-package com.knowledge.mnlin.methodinject.annotations;
+package com.knowledge.mnlin.methodinject_annotations.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author 小任
- * @date 2017/12/8
- * version 1.0
- * 描述:
+ * Created on 2017/12/13
+ * function :
+ *
+ * @author ACChain
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-public @interface FragmentInject {
+public @interface RootActivity {
 }

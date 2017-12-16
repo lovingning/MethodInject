@@ -2,20 +2,30 @@ apply plugin: 'java-library'
 apply plugin: 'bintray-release'//添加
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.google.auto.service:auto-service:1.0-rc3'
-    api 'com.squareup:javapoet:1.9.0'
-    api 'com.android.support:appcompat-v7:27.0.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
 
 //添加
 publish {
-    artifactId = 'methodinject-annotations'
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    uploadName = rootProject.uploadName
-    publishVersion = rootProject.publishVersion
-    desc = rootProject.description
-    website = rootProject.website
-    licences = rootProject.licences
+    artifactId = ARTIFACT_ID_ANNOTATIONS
+    userOrg = USER
+    groupId = GROUP_ID
+    publishVersion = VERSION
+    desc = DESCRIPTION
+    website = WEBSITE
 }

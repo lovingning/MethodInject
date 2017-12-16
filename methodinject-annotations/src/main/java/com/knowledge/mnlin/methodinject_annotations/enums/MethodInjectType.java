@@ -1,4 +1,4 @@
-package com.knowledge.mnlin.methodinject.enums;
+package com.knowledge.mnlin.methodinject_annotations.enums;
 
 /**
  * Created on 2017/12/12

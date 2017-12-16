@@ -1,7 +1,7 @@
-package com.knowledge.mnlin.methodinject.util;
+package com.knowledge.mnlin.methodinject_annotations.util;
 
 
-import com.knowledge.mnlin.methodinject.annotations.MethodInject;
+import com.knowledge.mnlin.methodinject_annotations.annotations.MethodInject;
 
 import javafx.util.Pair;
 

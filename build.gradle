@@ -1,7 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    
     repositories {
         google()
         jcenter()
@@ -12,15 +10,24 @@ buildscript {
         //bintray-release框架上传到jcenter
         classpath 'com.novoda:bintray-release:0.8.0'//添加
 
+        //gradle-bintray-plugin插件来上传到jcenter
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+def generatePomFilesTask = tasks.create("generatePomFiles")
+
 allprojects {
     repositories {
         google()
         jcenter()
+
+        //个人maven库 https://dl.bintray.com/lovingning/maven
+        maven { url "https://dl.bintray.com/lovingning/maven" }
     }
 
     tasks.withType(Javadoc) {
@@ -30,23 +37,25 @@ allprojects {
             links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
+
+    tasks.whenTaskAdded {
+        if (it.name.matches("generatePomFileFor([A-Z][a-zA-Z]*)Publication")) {
+            generatePomFilesTask.dependsOn it
+        }
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-//bintray-release框架上传到jcenter
-ext {
-    userOrg = 'lovingning'
-    groupId = 'com.knowledge.mnlin'
-    uploadName = 'MethodInject'
-    publishVersion = '0.0.1'
-    desc = 'method inject framwork '
-    website = 'https://github.com/lovingning/MethodInject'
-    licences = ["GPL-3.0"]
-}
-
-//gradlew clean build bintrayUpload -PbintrayUser=lovingning -PbintrayKey=0f58cc5f3f21a05e7ce9b26d042086a5e30aae99 -PdryRun=false
+//generatePomFileForMavenPublication
+//generatePomFileForReleasePublication
+//gradlew clean build generatePomFileForReleasePublication bintrayUpload -PbintrayUser=lovingning -PbintrayKey=0f58cc5f3f21a05e7ce9b26d042086a5e30aae99 -PdryRun=false
 
 

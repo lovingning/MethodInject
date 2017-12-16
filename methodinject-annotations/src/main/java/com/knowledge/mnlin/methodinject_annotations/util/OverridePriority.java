@@ -1,7 +1,8 @@
-package com.knowledge.mnlin.methodinject.util;
+package com.knowledge.mnlin.methodinject_annotations.util;
 
-import com.knowledge.mnlin.methodinject.annotations.MethodInject;
-import com.knowledge.mnlin.methodinject.enums.LifeCycleMethod;
+import com.knowledge.mnlin.methodinject_annotations.annotations.MethodInject;
+import com.knowledge.mnlin.methodinject_annotations.enums.LifeCycleMethod;
+import com.knowledge.mnlin.methodinject_annotations.enums.MethodInjectType;
 
 import java.lang.annotation.Annotation;
 
@@ -41,5 +42,10 @@ public final class OverridePriority implements MethodInject {
     @Override
     public Class<? extends Annotation> annotationType() {
         return MethodInject.class;
+    }
+
+    @Override
+    public MethodInjectType type() {
+        return null;
     }
 }

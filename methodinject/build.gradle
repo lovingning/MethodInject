@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'//添加
+
+//apply plugin: 'com.novoda.bintray-release'
+
+//gradle-bintray-plugin插件来上传到jcenter
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 26
@@ -18,7 +23,7 @@ android {
     }
 
     lintOptions {
-        abortOnError false
+        abortOnError true
     }
 
     buildTypes {
@@ -27,28 +32,121 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'com.android.support:appcompat-v7:26.1.0'
 
     //Logger
-    compile 'com.orhanobut:logger:2.1.1'
+    api 'com.orhanobut:logger:2.1.1'
 
-    compile project(':methodinject-annotations')
+    api 'com.android.support:support-annotations:27.0.2'
+
+    api 'com.knowledge.mnlin:methodinject-annotations:0.0.1'
 }
 
-//添加
+//gradle-bintray-plugin插件来上传到jcenter
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintrayUser")
+    key = properties.getProperty("bintrayApiKey")
+    configurations = ['archives']
+    pkg {
+        repo = REPONAME
+        name = ARTIFACT_ID_LIBRARY
+        websiteUrl = WEBSITE
+        vcsUrl = WEBSITE_GIT
+        licenses = ["GPL-3.0"]
+        publish = true
+    }
+}
+
+version = VERSION
+
+group = GROUP_ID
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging PACKAGE_TYPE_AAR
+                groupId GROUP_ID
+                name ARTIFACT_ID_LIBRARY
+                url WEBSITE
+                // Set your license
+                licenses {
+                    license {
+                        name 'GNU General Public License, Version 3.0'
+                        url 'http://www.gnu.org/licenses/gpl-3.0.html'
+                    }
+                }
+                developers {
+                    developer { //填写的一些基本信息
+                        id 'mnlin'
+                        name '**.wang'
+                        email 'mnlin0905@gmail.com'
+                    }
+                }
+                scm {
+                    connection WEBSITE_GIT
+                    developerConnection WEBSITE_GIT
+                    url WEBSITE
+                }
+            }
+        }
+    }
+}
+
+/*task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 publish {
-    artifactId = 'methodinject'
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    uploadName = rootProject.uploadName
-    publishVersion = rootProject.publishVersion
-    desc = rootProject.description
-    website = rootProject.website
-    licences = rootProject.licences
-}
+    userOrg = USER
+    groupId = GROUP_ID
+    artifactId = "temp"
+    version = VERSION
+    desc = DESCRIPTION
+    website = WEBSITE
+}*/
+
+
+
+
+

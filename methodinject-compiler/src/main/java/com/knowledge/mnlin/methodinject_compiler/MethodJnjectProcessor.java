@@ -1,15 +1,15 @@
-package com.knowledge.mnlin.methodinject;
+package com.knowledge.mnlin.test;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.auto.service.AutoService;
-import com.knowledge.mnlin.methodinject.annotations.ActivityInject;
-import com.knowledge.mnlin.methodinject.annotations.MethodInject;
-import com.knowledge.mnlin.methodinject.annotations.MethodInject_CreateFile;
-import com.knowledge.mnlin.methodinject.annotations.RootActivity;
-import com.knowledge.mnlin.methodinject.enums.LifeCycleMethod;
-import com.knowledge.mnlin.methodinject.util.OverridePair;
+import com.knowledge.mnlin.methodinject_annotations.annotations.ActivityInject;
+import com.knowledge.mnlin.methodinject_annotations.annotations.MethodInject;
+import com.knowledge.mnlin.methodinject_annotations.annotations.MethodInject_CreateFile;
+import com.knowledge.mnlin.methodinject_annotations.annotations.RootActivity;
+import com.knowledge.mnlin.methodinject_annotations.enums.LifeCycleMethod;
+import com.knowledge.mnlin.methodinject_annotations.util.OverridePair;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;

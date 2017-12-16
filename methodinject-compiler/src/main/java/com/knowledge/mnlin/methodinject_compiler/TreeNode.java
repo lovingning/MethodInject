@@ -1,4 +1,4 @@
-package com.knowledge.mnlin.methodinject;
+package com.knowledge.mnlin.test;
 
 import java.util.LinkedList;
 

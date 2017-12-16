@@ -1,7 +1,7 @@
-package com.knowledge.mnlin.methodinject.annotations;
+package com.knowledge.mnlin.methodinject_annotations.annotations;
 
-import com.knowledge.mnlin.methodinject.enums.LifeCycleMethod;
-import com.knowledge.mnlin.methodinject.enums.MethodInjectType;
+import com.knowledge.mnlin.methodinject_annotations.enums.LifeCycleMethod;
+import com.knowledge.mnlin.methodinject_annotations.enums.MethodInjectType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,17 +25,9 @@ public @interface MethodInject {
     LifeCycleMethod method() default LifeCycleMethod.onCreate;
 
     /**
-     * @deprecated
-     *
-     * 权限管理为全局操作, 即子类方法f1权限为1, 父类方法f2权限为2, 则方法执行顺序为:
-     * obj.f1();
-     * obj.f2();
-     * 若父类子类方法权限相同,则默认: 权限小于5的情况下子类方法先执行;权限大于5的情况下子类方法后执行
-     *
-     */
-
-    /**
      * 方法调用的权限
+     * <p>
+     * 按照一般情况:权限小于5的情况下子类方法先执行;权限大于5的情况下子类方法后执行
      * <p>
      * 取值为1-9
      * <p>
@@ -62,6 +54,6 @@ public @interface MethodInject {
      *
      * @see MethodInjectType
      */
-//    @Deprecated
-//    MethodInjectType type() default MethodInjectType.OVERRIDE;
+    @Deprecated
+    MethodInjectType type() default MethodInjectType.OVERRIDE;
 }

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.knowledge.mnlin.methodinject_annotations.annotations.RootActivity;
 import com.orhanobut.logger.Logger;
-import com.knowledge.mnlin.methodinject.annotations.RootActivity;
 
 import java.lang.reflect.Method;
 

@@ -1,1 +1,4 @@
-include ':app', ':methodinject-annotations', ':methodinject', ':methodinject-compiler'
+include ':app'
+//include ':methodinject-annotations'
+//include ':methodinject'
+//include ':methodinject-compiler'

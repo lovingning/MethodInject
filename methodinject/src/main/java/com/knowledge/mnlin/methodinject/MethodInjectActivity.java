@@ -29,7 +29,7 @@ public abstract class MethodInjectActivity extends AppCompatActivity {
      */
     private ActivityLifeCycle methodManager;
 
-    /*静态代码块,用于为methodManager赋值*/ {
+    /*动态代码块,用于为methodManager赋值*/ {
         if (autoInject) {
             Logger.v("自动注入对象");
             try {
@@ -136,7 +136,7 @@ public abstract class MethodInjectActivity extends AppCompatActivity {
     /**
      * 设置该方法后,将替换已存在的MethodLifecycle对象
      */
-    protected void replaceMethodInject(@Nullable ActivityLifeCycle methodManager) {
+    protected final void replaceMethodInject(@Nullable ActivityLifeCycle methodManager) {
         this.methodManager = methodManager == null ? ActivityDoNothing.getInstance() : methodManager;
     }
 }

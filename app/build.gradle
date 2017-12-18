@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    buildToolsVersion '27.0.1'
     defaultConfig {
         applicationId "com.knowledge.mnlin.test"
         minSdkVersion 16
@@ -11,17 +12,44 @@ android {
 
         multiDexEnabled true
     }
+
+    signingConfigs {
+        debug {
+            keyAlias 'pylink'
+            keyPassword 'password1'
+            storeFile file('/ac_chain.jks')
+            storePassword 'password1'
+            v2SigningEnabled false
+        }
+        release {
+            keyAlias 'pylink'
+            keyPassword 'password1'
+            storeFile file('/ac_chain.jks')
+            storePassword 'password1'
+            v2SigningEnabled true
+        }
+    }
+
+    //此处为添加内容
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField('boolean','DEBUG_INJECT_METHOD','false')
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+            buildConfigField('boolean','DEBUG_INJECT_METHOD','true')
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
+
 
 
 //    dexOptions {

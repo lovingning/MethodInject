@@ -1,5 +1,5 @@
 # MethodInject
-[![permit](https://img.shields.io/aur/license/yaourt.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![License](https://img.shields.io/aur/license/yaourt.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 Method注解处理器,主要功能:
 
